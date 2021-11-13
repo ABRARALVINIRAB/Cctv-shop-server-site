@@ -65,7 +65,7 @@ async function run() {
             const result = await reviewsCollection.insertOne(review);
             res.json(result);
         })
-        // add orders api
+        //  orders 
         app.post('/orders', async (req, res) => {
             const order = req.body;
 
@@ -84,7 +84,11 @@ async function run() {
             res.json(order);
         })
 
-       
+        app.get('/orders', async (req, res) => {
+            const cursor = ordersCollection.find({});
+            const order = await cursor.toArray();
+            res.send(order);
+        })
 
         // app.get("/orders", async (req, res) => {
         //     const email = req.query.email;
@@ -94,11 +98,7 @@ async function run() {
         //     const result = await cursor.toArray();
         //     res.send(result)
         // })
-        app.get('/orders', async (req, res) => {
-            const cursor = ordersCollection.find({});
-            const order = await cursor.toArray();
-            res.send(order);
-        })
+
 
 
 
@@ -130,9 +130,9 @@ async function run() {
                     phone: updatedUser.phone,
                     name: updatedUser.name,
 
-                   
+
                     status: updatedUser.status,
-                    
+
 
                 },
             };
